@@ -1,6 +1,9 @@
 const TelegramBot = require('node-telegram-bot-api')
 const { parseExpenseMessage } = require('./parser')
 const { addTransaction, findAccountByName } = require('./ynab')
+const planId = process.env.YNAB_PLAN_ID
+const defaultAccountId = process.env.YNAB_DEFAULT_ACCOUNT_ID
+const defaultAccountName = process.env.YNAB_DEFAULT_ACCOUNT_NAME
 
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true })
 
@@ -113,7 +116,6 @@ Adding to YNAB`
 
   bot.sendMessage(chatId, successMessage)
 
-  const planId = '71b3970b-d8cc-4dba-b220-b1ff15b4b854'
   let accountId
   let finalAccountName
 
@@ -130,14 +132,14 @@ Available accounts:
 • Savings
 • Informal debts
 
-Try: ${payee} - ${memo} - ${originalAmount} - principal`)
+Try: ${payee} - ${memo} - ${originalAmount} - ${defaultAccountName}`)
       return null
     }
     accountId = account.id
     finalAccountName = account.name
   } else {
-    accountId = '911b8e62-3628-4134-a3d2-daeabe26357e'
-    finalAccountName = 'Principal'
+    accountId = defaultAccountId
+    finalAccountName = defaultAccountName
   }
 
   const result = await addTransaction(planId, accountId, payee, memo, amount)
