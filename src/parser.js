@@ -2,9 +2,6 @@ function parseExpenseMessage (message) {
   try {
     const parts = message.trim().split('-').map(part => part.trim())
 
-    console.log('🔍 Debug - Parts after split:', parts)
-    console.log('🔍 Debug - Number of parts:', parts.length)
-
     if (parts.length < 3) {
       return {
         success: false,
@@ -18,10 +15,6 @@ function parseExpenseMessage (message) {
         error: 'Too many parts. Use: payee - memo - amount - account (optional)'
       }
     }
-
-    console.log('🔍 Debug - Parts length check passed')
-
-    // const [payee, memo, amountStr] = parts
 
     let payee, memo, amountStr, accountName
 
@@ -51,8 +44,6 @@ function parseExpenseMessage (message) {
     }
 
     const ynabAmount = Math.round(amount * -1000)
-
-    console.log('🔍 Parser Debug - About to return success! ', ynabAmount)
 
     return {
       success: true,

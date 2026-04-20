@@ -23,7 +23,6 @@ async function initializeYNAB () {
     const budgets = await getBudgets()
     if (budgets.length > 0) {
       const firstBudget = budgets[0]
-      console.log(`\n using budget: ${firstBudget.name}`)
       await getAccounts(firstBudget.id)
     }
   }

@@ -7,17 +7,9 @@ const defaultAccountName = process.env.YNAB_DEFAULT_ACCOUNT_NAME
 
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true })
 
-// Add debugging
-bot.on('polling_error', (error) => {
-  console.log('❌ Polling error:', error.message)
-})
-
 bot.on('error', (error) => {
   console.log('❌ Bot error:', error.message)
 })
-
-console.log('🤖 Telegram bot is starting...')
-console.log('Bot token exists:', !!process.env.TELEGRAM_BOT_TOKEN)
 
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id
@@ -72,8 +64,6 @@ bot.on('message', async (msg) => {
   const messageText = msg.text
 
   console.log('received message:', messageText)
-  console.log('🔍 Bot Debug - Message includes dash:', messageText.includes('-'))
-  console.log('🔍 Bot Debug - Message length:', messageText.length)
 
   if (!messageText.includes('-')) {
     console.log('Please use a right format payee - memo - amount')
@@ -81,17 +71,6 @@ bot.on('message', async (msg) => {
   }
 
   const parseResult = parseExpenseMessage(messageText)
-  console.log('🔍 Bot Debug - Parse result:', parseResult)
-
-  if (!parseResult.success) {
-    console.log('🔍 Bot Debug - Parser failed, sending error')
-  // Send error message to user
-  // ...
-  } else {
-    console.log('🔍 Bot Debug - Parser succeeded!')
-  // Success! Show parsed data
-  // ...
-  }
 
   if (!parseResult.success) {
     // Send error message to user
