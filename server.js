@@ -15,8 +15,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
 
-console.log('Bot is starting...')
-
 async function initializeYNAB () {
   const connected = await testConnection()
   if (connected) {
@@ -26,7 +24,6 @@ async function initializeYNAB () {
       await getAccounts(firstBudget.id)
     }
   }
-  console.log('--- End YNAB Initialization ---\n')
 }
 
 initializeYNAB()

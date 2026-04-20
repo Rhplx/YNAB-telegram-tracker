@@ -63,10 +63,7 @@ bot.on('message', async (msg) => {
   const chatId = msg.chat.id
   const messageText = msg.text
 
-  console.log('received message:', messageText)
-
   if (!messageText.includes('-')) {
-    console.log('Please use a right format payee - memo - amount')
     return null
   }
 

@@ -4,12 +4,7 @@ const ynabAPI = new ynab.API(process.env.YNAB_ACCESS_TOKEN)
 
 async function testConnection () {
   try {
-    console.log('testing YNAB connection...')
-    console.log('Token exists', !!process.env.YNAB_ACCESS_TOKEN)
-    console.log('Token length', process.env.YNAB_ACCESS_TOKEN ? process.env.YNAB_ACCESS_TOKEN.length : 0)
-
     const userResponse = await ynabAPI.user.getUser()
-    console.log('✅ Connection succcesfull')
     console.log('user ID: ', userResponse.data.user.id)
     return true
   } catch (error) {
@@ -22,7 +17,6 @@ async function testConnection () {
 
 async function getBudgets () {
   try {
-    console.log('getting budgets...')
     const budgetsResponse = await ynabAPI.plans.getPlans()
     const budgets = budgetsResponse.data.plans
 
