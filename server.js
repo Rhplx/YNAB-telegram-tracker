@@ -8,7 +8,11 @@ const { testConnection, getBudgets, getAccounts } = require('./src/ynab')
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.json({ message: 'YNAB/Telegram bot is running' })
+  res.json({ message: 'YNAB/Telegram bot is running', status: 'healthy', timestamp: new Date().toISOString() })
+})
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK' })
 })
 
 app.listen(PORT, () => {
