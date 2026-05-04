@@ -3,6 +3,10 @@
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
   "eslint.enable": true,
+  "eslint.validate": ["javascript"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.run": "onType",
+  "eslint.useFlatConfig": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
